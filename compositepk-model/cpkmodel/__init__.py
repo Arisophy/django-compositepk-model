@@ -2,8 +2,8 @@
 Package for the application library(Mulit-Column Primary Keys)
 """
 
-from cpkmodel.cpkmodel import CPkModel
-from cpkmodel.cpkquery import (
+from .cpkmodel import CPkModel
+from .cpkquery import (
     CPkQuery,
     CPkDeleteQuery,
     CPkUpdateQuery,
