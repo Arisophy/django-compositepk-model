@@ -4,7 +4,7 @@ Provide an extended Django Model class named 'CPkModel' that supports composite 
 
 This package supports treating legacy db tables with a composite primary key without adding a surrogate key.
 
-This is my other approach to [ticket329](https://code.djangoproject.com/ticket/373).
+This is my other approach to [ticket373](https://code.djangoproject.com/ticket/373).
 
 ## Features
 
