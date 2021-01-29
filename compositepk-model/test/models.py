@@ -19,7 +19,7 @@ class Company(models.Model):
     class Meta:
         db_table = 'Company'
 
-CPkModel
+
 # Child Model (CpkModel)
 #   primary_key is composite-key: company_id, country_code
 class CompanyBranch(CPkModel):
@@ -71,5 +71,3 @@ class Album(CPkModel):
     class Meta:
         db_table = 'Album'
         unique_together = (('artist', 'album_no'),)
-
-
