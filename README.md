@@ -74,7 +74,7 @@ Lookup Multi-Column with 'in' is also avairable. PostgreSQL is fine, But SQLite3
 
 ```python
 qs = CompanyBranch.objects.filter(pk__in=[(1,'JP'),(1,'US'),(2,'JP'),])
-qs = CompanyBranch.objects.filter(**{'country_code,name':[('JP','HONDA'),('CN','SONY'),]})
+qs = CompanyBranch.objects.filter(**{'country_code,name__in':[('JP','HONDA'),('CN','SONY'),]})
 ```
 
 ## Installation
