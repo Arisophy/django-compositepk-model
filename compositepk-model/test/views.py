@@ -211,7 +211,7 @@ def test_filter(request):
         # __in
         (201, 'pk__in', [(musician.id, 1)], SQLite_error),
         (202, 'pk__in', [(1, 1),(2,1)],SQLite_error),
-        (203, 'pk__in', [[1, 1],[2,1]], SQLite_error),
+        (203, 'pk__in', ['1,1','2,1'], SQLite_error),
         (204, 'pk__in', qs_kv_name_startwith, SQLite_error),
         (205, 'pk__in', list(qs_kv_name_startwith), SQLite_error),
         (211, 'artist_id,album_no__in', [(1, 1),(2,1)], SQLite_error),
