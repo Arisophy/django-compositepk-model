@@ -1,0 +1,103 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Album{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Test Album</h1>
+  <p class="lead">Test For CPkModel : Album</p>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Model</h2>
+      <div>
+        <pre>
+class Album(CPkModel):
+    artist = models.ForeignKey(
+        Musician,
+        primary_key=True,       # for CompositePK
+        on_delete=models.CASCADE)
+    album_no = models.IntegerField(
+        primary_key=True,       # for CompositePK
+    )
+    name = models.CharField(max_length=100)
+    release_date = models.DateField()
+    num_stars = models.IntegerField()
+    item_code = models.CharField(max_length=100)
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'Album'
+        unique_together = (('artist', 'album_no'),)
+        </pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>CREATE SQL</h2>
+      <div>
+        <pre>
+CREATE TABLE "Album" (
+  "artist_id" integer NOT NULL REFERENCES "Musician" ("id") DEFERRABLE INITIALLY DEFERRED,
+  "album_no" integer NOT NULL,
+  "name" varchar(100) NOT NULL,
+  "release_date" date NOT NULL,
+  "num_stars" integer NOT NULL,
+  "item_code" varchar(100) NOT NULL,
+  "company_id" integer NOT NULL REFERENCES "Company" ("id") DEFERRABLE INITIALLY DEFERRED);
+CREATE UNIQUE INDEX "Album_artist_id_album_no_uniq" ON "Album" ("artist_id", "album_no");
+CREATE INDEX "Album_artist_id" ON "Album" ("artist_id");
+CREATE INDEX "Album_company_id" ON "Album" ("company_id");
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div>
+    <h2>Check Album</h2>
+    <div>
+      {% with obj=object_list.first %}
+        {% if obj %}
+          {% include "app\_model.html" %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+  <div >
+    <h2>Album List</h2>
+    <div>
+      <table class="table table-striped table-sm table-bordered">
+        <thead>
+          <tr>
+            <th>#artist</th>
+            <th>#album_no</th>
+             <th>name</th>
+             <th>release_date</th>
+             <th>num_stars</th>
+             <th>item_code</th>
+             <th>company</th>
+            </tr>
+          </thead>
+        <tbody>
+          {% for album in object_list %}
+            <tr>
+              <td>{{ album.artist }}</td>
+              <td>{{ album.album_no }}</td>
+              <td>{{ album.name }}</td>
+              <td>{{ album.release_date }}</td>
+              <td>{{ album.num_stars }}</td>
+              <td>{{ album.item_code }}</td>
+              <td>{{ album.company }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,96 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Test Filter{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Test Filter</h1>
+  <p class="lead">Test Filter conditions for Album(CPkModel) with Musician(CPkModel) and Compnay(Model)</p>
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Album(CPkModel)</h2>
+      <div>
+        <pre>
+class Album(CPkModel):
+    artist = models.ForeignKey(
+        Musician,
+        primary_key=True,       # for CompositePK
+        on_delete=models.CASCADE)
+    album_no = models.IntegerField(
+        primary_key=True,       # for CompositePK
+    )
+    name = models.CharField(max_length=100)
+    release_date = models.DateField()
+    num_stars = models.IntegerField()
+    item_code = models.CharField(max_length=100)
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'Album'
+        unique_together = (('artist', 'album_no'),)
+        </pre>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h2>Musician(CPkModel)</h2>
+      <div>
+        <pre>
+class Musician(CPkModel):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    profile = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'Musician'
+        </pre>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h2>Company(Model)</h2>
+      <div>
+        <pre>
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    established_date = models.DateField()
+    company_code = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'Company'
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h2>Test Results</h2>
+  <p> result = Album.objects.filter(condition)</p>
+  <div>
+    <table class="table table-striped table-bordered table-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>condtion</th>
+          <th>result</th>
+          <th>memo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in objects %}
+        <tr>
+          <td align="right">{{ obj.no }}</td>
+          <td>{{ obj.key }}={{ obj.val }}</td>
+          <td>{{ obj.result }}</td>
+          <td>{{ obj.memo }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+

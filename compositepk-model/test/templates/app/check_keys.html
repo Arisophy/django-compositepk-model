@@ -1,0 +1,71 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Check CompositePK{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Check CompositePK</h1>
+  <p class="lead">Check PK and CompositePK</p>
+</div>
+
+<div class="row">
+  {% for obj in objects %}
+  <div class="col-md-6">
+    <h2>{{ obj.name }}</h2>
+    <table class="table table-striped table-bordered table-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>_meta.pk</td>
+          <td>{{ obj.meta.pk }}</td>
+        </tr>
+        <tr>
+          <td>pk Class</td>
+          <td>{{ obj.pk_cls }}</td>
+        </tr>
+        <tr>
+          <td>pk.keys</td>
+          <td>{{ obj.pk.keys }}</td>
+        </tr>
+        <tr>
+          <td>pk.name</td>
+          <td>{{ obj.pk.name }}</td>
+        </tr>
+        <tr>
+          <td>pk.attname</td>
+          <td>{{ obj.pk.attname }}</td>
+        </tr>
+        <tr>
+          <td>pk.column</td>
+          <td>{{ obj.pk.column }}</td>
+        </tr>
+        <tr>
+          <td>pk.db_column</td>
+          <td>{{ obj.pk.db_column }}</td>
+        </tr>
+        <tr>
+          <td>pk.names</td>
+          <td>{{ obj.pk.names }}</td>
+        </tr>
+        <tr>
+          <td>pk.model</td>
+          <td>{{ obj.pk.model }}</td>
+        </tr>
+        <tr>
+          <td>pk.Col</td>
+          <td>{{ obj.col }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
+

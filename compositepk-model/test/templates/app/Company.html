@@ -1,0 +1,83 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Company{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Test Company</h1>
+  <p class="lead">Test For Normal Model : Company</p>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Model</h2>
+      <div>
+        <pre>
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    established_date = models.DateField()
+    company_code = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'Company'
+        </pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>CREATE SQL</h2>
+      <div>
+        <pre>
+CREATE TABLE "Company" (
+  "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "name" varchar(100) NOT NULL,
+  "established_date" date NOT NULL,
+  "company_code" varchar(100) NOT NULL);
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h2>Check Company</h2>
+    <div>
+      {% with obj=object_list.first %}
+        {% if obj %}
+          {% include "app\_model.html" %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+    <div class="col-md-8">
+      <h2>Company List</h2>
+        <div>
+          <table class="table table-striped table-sm table-bordered">
+            <thead>
+              <tr>
+                <th>#id</th>
+                <th>name</th>
+                <th>established_date</th>
+                <th>company_code</th>
+                <th>branch count</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for compnay in object_list %}
+                <tr>
+                  <td>{{ compnay.id }}</td>
+                  <td>{{ compnay.name }}</td>
+                  <td>{{ compnay.established_date }}</td>
+                  <td>{{ compnay.company_code }}</td>
+                  <td><a  href="{% url 'companybranch' compnay.id %}">{{ compnay.companybranch_set.count }}</a></td>
+                  <td><a class="btn btn-sm btn-primary" href="{% url 'add_companybranch' compnay.id %}">Add Branch</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

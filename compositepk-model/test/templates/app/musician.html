@@ -1,0 +1,83 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Musician{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Test Musician</h1>
+  <p class="lead">Test For CPkModel : Musician</p>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Model</h2>
+      <div>
+        <pre>
+class Musician(CPkModel):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    profile = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'Musician'
+        </pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>CREATE SQL</h2>
+      <div>
+        <pre>
+CREATE TABLE "Musician" (
+  "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "first_name" varchar(50) NOT NULL,
+  "last_name" varchar(50) NOT NULL,
+  "profile" varchar(100) NOT NULL);
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-5">
+    <h2>Check Musician</h2>
+    <div>
+      {% with obj=object_list.first %}
+        {% if obj %}
+          {% include "app\_model.html" %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+    <div class="col-md-7">
+        <h2>Musician List</h2>
+        <div>
+          <table class="table table-striped table-sm table-bordered">
+            <thead>
+              <tr>
+                <th>#id</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>profile</th>
+                <th>album count</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for musician in object_list %}
+                <tr>
+                  <td>{{ musician.id }}</td>
+                  <td>{{ musician.first_name }}</td>
+                  <td>{{ musician.last_name }}</td>
+                  <td>{{ musician.profile }}</td>
+                  <td><a  href="{% url 'album' musician.id %}">{{ musician.album_set.count }}</a></td>
+                  <td><a class="btn btn-sm btn-primary" href="{% url 'add_album' musician.id %}">Add Album</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,89 @@
+{% extends "app/layout.html" %}
+
+{% block title %}CompanyBranch{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Test Album</h1>
+  <p class="lead">Test For CPkModel : CompanyBranch</p>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Model</h2>
+      <div>
+        <pre>
+class CompanyBranch(CPkModel):
+    company = models.ForeignKey(
+        Company,
+        primary_key=True,       # for CompositePK
+        on_delete=models.CASCADE)
+    country_code = models.CharField(
+        max_length=100,
+        primary_key=True,       # for CompositePK
+    )
+    name = models.CharField(max_length=100)
+    established_date = models.DateField()
+
+    class Meta:
+        db_table = 'CompanyBranch'
+        unique_together = (('company', 'country_code'),)
+        </pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>CREATE SQL</h2>
+      <div>
+        <pre>
+CREATE TABLE "CompanyBranch" (
+  "company_id" integer NOT NULL REFERENCES "Company" ("id") DEFERRABLE INITIALLY DEFERRED,
+  "country_code" varchar(100) NOT NULL,
+  "name" varchar(100) NOT NULL,
+  "established_date" date NOT NULL);
+CREATE INDEX "CompanyBranch_company_id" ON "CompanyBranch" ("company_id");
+CREATE UNIQUE INDEX "CompanyBranch_company_id_country_code_uniq" ON "CompanyBranch" ("company_id", "country_code");
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h2>Check CompanyBranch</h2>
+    <div>
+      {% with obj=object_list.first %}
+        {% if obj %}
+          {% include "app\_model.html" %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h2>CompanyBranch List</h2>
+    <div>
+      <table class="table table-striped table-sm table-bordered">
+        <thead>
+          <tr>
+            <th>#company</th>
+            <th>#country_code</th>
+            <th>name</th>
+            <th>established_date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for branch in object_list %}
+          <tr>
+            <td>{{ branch.company }}</td>
+            <td>{{ branch.country_code }}</td>
+            <td>{{ branch.name }}</td>
+            <td>{{ branch.established_date }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+  {% endblock %}
+
