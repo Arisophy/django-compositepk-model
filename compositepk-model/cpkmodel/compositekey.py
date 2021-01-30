@@ -4,7 +4,7 @@ from django.db.models.expressions import Col
 from .constants import CPK_SEP
 
 
-class CompsiteCol(Col):
+class CompositeCol(Col):
     def __init__(self, alias, target, output_field=None):
         super().__init__(alias, target, output_field)
         self.children = [Col(alias, key, output_field) for key in target.keys]
@@ -35,4 +35,4 @@ class CompositeKey(Field):
         self.model = keys[0].model
 
     def get_col(self, alias, output_field=None):
-        return CompsiteCol(alias, self, output_field)
+        return CompositeCol(alias, self, output_field)
