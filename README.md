@@ -29,7 +29,7 @@ class Company(models.Model):
         db_table = 'Company'
 
 # Child Model (CpkModel)
-#   primary_composite-key: company_id, country_code
+#   composite primary key: company_id, country_code
 class CompanyBranch(CPkModel):
     company = models.ForeignKey(
         Company,
