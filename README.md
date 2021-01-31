@@ -51,7 +51,7 @@ That's all. No additional definitions or virtual fields are required.
 
 ### 2. Admin avairable
 
-CPkModel can be used in Django Admin. The values of composite primary key are displayed comma separated style. Change(Update), Delete are fine. Add(Create) has a problem that CreateView do unique check to each key Field. So you can't add enough child records. But, this is only CreateView's problem. Your program can create child records by QuerySet or Model method.
+CPkModel can be used in Django Admin. The values of composite primary key are displayed in a comma separated style. Change(Update), Delete are fine. Add(Create) has a problem that CreateView do unique check to each key Field. So you can't add enough child records. But, this is only CreateView's problem. Your program can create child records by QuerySet or Model method.
 
 ### 3. Multi-column lookup avairable
 
