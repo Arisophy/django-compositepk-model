@@ -43,12 +43,15 @@ class CompanyBranch(CPkModel):
     established_date = models.DateField()
 
     class Meta:
-        managed = False  # for CompositePK
+        managed = False  # for CompositePK *1
         db_table = 'CompanyBranch'
         unique_together = (('company', 'country_code'),)  # for CompositePK
 ```
 
 That's all. No additional definitions or virtual fields are required.
+
+*1: "migration" will fail because "primary_key=True" to multi-column. 
+    lagacy tables already exisits, or must be created by hand.
 
 ### 2. Admin avairable
 
