@@ -43,6 +43,7 @@ class CompanyBranch(CPkModel):
     established_date = models.DateField()
 
     class Meta:
+        managed = False  # for CompositePK
         db_table = 'CompanyBranch'
         unique_together = (('company', 'country_code'),)  # for CompositePK
 ```
