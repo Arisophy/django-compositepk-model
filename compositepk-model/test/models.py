@@ -15,7 +15,6 @@ class Company(models.Model):
     name = models.CharField(max_length=100)
     established_date = models.DateField()
     company_code = models.CharField(max_length=100)
-    company_code2 = models.CharField(max_length=100)
 
     class Meta:
         managed = False
