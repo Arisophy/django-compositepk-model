@@ -15,10 +15,11 @@ class Company(models.Model):
     name = models.CharField(max_length=100)
     established_date = models.DateField()
     company_code = models.CharField(max_length=100)
+    company_code2 = models.CharField(max_length=100)
 
     class Meta:
+        managed = False
         db_table = 'Company'
-
 
 # Child Model (CpkModel)
 #   primary_key is composite-key: company_id, country_code
@@ -35,6 +36,7 @@ class CompanyBranch(CPkModel):
     established_date = models.DateField()
 
     class Meta:
+        managed = False
         db_table = 'CompanyBranch'
         unique_together = (('company', 'country_code'),)
 
@@ -47,6 +49,7 @@ class Musician(CPkModel):
     profile = models.CharField(max_length=100)
 
     class Meta:
+        managed = False
         db_table = 'Musician'
 
 
@@ -69,5 +72,6 @@ class Album(CPkModel):
         on_delete=models.CASCADE)
 
     class Meta:
+        managed = False
         db_table = 'Album'
         unique_together = (('artist', 'album_no'),)
