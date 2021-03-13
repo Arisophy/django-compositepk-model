@@ -216,8 +216,3 @@ class CPkQuerySet(QuerySet):
             for pks, update_kwargs in updates:
                 self.filter(pk__in=pks).update(**update_kwargs)
     bulk_update.alters_data = True
-
-    def _get_pk_condition(self, obj):
-        conditions = {}
-        
-        pass
