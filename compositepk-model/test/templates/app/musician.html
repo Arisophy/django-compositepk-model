@@ -75,6 +75,15 @@ CREATE TABLE "Musician" (
               {% endfor %}
             </tbody>
           </table>
+          {% if object_list|length > 0 %}
+            <div>
+              <form action="{% url 'set_profile_all' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="profile" value="">
+                <input type="submit" class="btn btn-primary" role="button" value="set profile to all(bulk_update)">
+              </form>
+            </div>
+          {% endif %}
         </div>
     </div>
 </div>

@@ -3,12 +3,14 @@ Definition of views.
 """
 
 from datetime import datetime
+
 from django.shortcuts import render
-from django.http import HttpRequest
+from django.http import HttpRequest,HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView
 from django.db.models import Max
 from django.db import DatabaseError, InterfaceError
+
 from test.models import (
     Musician,
     Album,
@@ -19,7 +21,6 @@ from test.forms import (
     AlbumForm,
     CompanyBranchForm,
 )
-
 
 ################
 # home
@@ -39,6 +40,16 @@ class MusicianListView(ListView):
     template_name = 'app/musician.html'
     model = Musician
 
+def set_profile_all(request):
+    """  bulk_update test """
+    musicians = Musician.objects.all()
+    prof = request.POST.get('profile')
+    for musician in musicians:
+        musician.profile = prof
+    Musician.objects.bulk_update(musicians, ['profile',])
+ 
+    return HttpResponseRedirect('/musician/')
+
 
 ################
 # Album
@@ -55,7 +66,6 @@ class AlbumListView(ListView):
         ######################################
         # filter pattern(2) : artist=obj
         return super().get_queryset().filter(artist=musician)
-
 
 class AlbumFormView(FormView):
     template_name = 'app/album_create.html'
@@ -105,6 +115,14 @@ class AlbumFormView(FormView):
         album.save()
         return super().form_valid(form)
 
+def set_5stars(request, id):
+    """  bulk_update test """
+    albums = Album.objects.filter(artist_id=id)
+    for album in albums:
+        album.num_stars = 5
+    Album.objects.bulk_update(albums, ['num_stars',])
+ 
+    return HttpResponseRedirect("/artisit/{}/album/".format(id))
 
 ################
 # Company
@@ -247,15 +265,19 @@ def test_filter(request):
 ################
 def check_keys(request):
     def make_result(name, obj):
-        col = obj._meta.pk.get_col(name)
-        result = {
-            'name':name,
-            'meta':obj._meta,
-            'pk':obj._meta.pk,
-            'pk_cls':obj._meta.pk.__class__.__name__,
-            'col':col,
-        }
-        return result
+        if obj:
+            col = obj._meta.pk.get_col(name)
+            result = {
+                'name':name,
+                'meta':obj._meta,
+                'pk':obj._meta.pk,
+                'pk_cls':obj._meta.pk.__class__.__name__,
+                'col':col,
+                'pkval':obj.pk,
+            }
+            return result
+        else:
+            return None
 
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
