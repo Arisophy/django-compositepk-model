@@ -95,9 +95,10 @@ CREATE INDEX "Album_company_id" ON "Album" ("company_id");
           {% endfor %}
         </tbody>
       </table>
+      {% if object_list|length > 0 %}
+        <div><a class="btn btn-primary" href="{% url 'set_5stars' object_list.0.artist_id %}" role="button">set 5stars to all(bulk_update)</a></div>
+      {% endif %}
     </div>
   </div>
 
-
 {% endblock %}
-

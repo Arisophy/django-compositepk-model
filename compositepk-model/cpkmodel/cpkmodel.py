@@ -47,6 +47,14 @@ class CPkModelMixin:
     def _no_check():
         return []
 
+    def get_pk_lookups(self):
+        if self.has_compositepk:
+            keys = self.pkeys
+            vals = self.pkvals
+            return { key.attname:val for key, val in zip(keys, vals)}
+        else:
+            return { 'pk':self.pk }
+        
 
     ###########################
     # override
@@ -101,6 +109,7 @@ class CPkModelBase(ModelBase):
                 setattr(super_new, "delete", CPkModelMixin.delete)
             else:
                 super_new.has_compositepk = False
+            setattr(super_new, "get_pk_lookups", CPkModelMixin.get_pk_lookups)
             meta.base_manager._queryset_class = CPkQuerySet
             meta.default_manager._queryset_class = CPkQuerySet           
             super_new.pkeys = pkeys
