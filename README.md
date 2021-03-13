@@ -77,6 +77,14 @@ qs = CompanyBranch.objects.filter(pk__in=[(1,'JP'),(1,'US'),(2,'JP'),])
 qs = CompanyBranch.objects.filter(**{'country_code,name__in':[('JP','HONDA'),('CN','SONY'),]})
 ```
 
+### 4. bulk_update avairable (v1.0.2)
+
+bulk_update methond avairable for PostgreSQL. But SQLite3 is not supported.
+
+```python
+   Album.objects.bulk_update(albums, ['num_stars',])
+```
+
 ## Installation
 
 pip install django-compositepk-model
