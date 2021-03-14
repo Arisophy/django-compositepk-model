@@ -50,9 +50,10 @@ class CompanyBranch(CPkModel):
 
 That's all. No additional definitions or virtual fields are required.
 
-*1: "migration" will fail because "primary_key=True" to multi-column. 
-    lagacy tables already exisit, or must be created by hand.
-
+*1: "Migration" will fail because "primary_key=True" to multi-column. 
+    legacy tables already exisit, or must be created by hand.
+    Or, comment out "primary_key=True" and "managed=False" while migration.
+    
 ### 2. Admin avairable
 
 CPkModel can be used in Django Admin. The values of composite primary key are displayed in a comma separated style. Change(Update), Delete are fine. Add(Create) has a problem that CreateView do unique check to each key Field. So you can't add enough child records. But, this is only CreateView's problem. Your program can create child records by QuerySet or Model method.
