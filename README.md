@@ -50,8 +50,8 @@ class CompanyBranch(CPkModel):
 
 That's all. No additional definitions or virtual fields are required.
 
-*1: "Migration" will fail because "primary_key=True" to multi-column. 
-    legacy tables already exisit, or must be created by hand.
+*1: "Migration" will fail because "primary_key=True" to multi-column unless "managed = False". 
+    Legacy tables already exisit, or have to be created by hand.
     Or, comment out "primary_key=True" and "managed=False" while migration.
     
 ### 2. Admin avairable
