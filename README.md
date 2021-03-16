@@ -127,4 +127,5 @@ pip install django-compositepk-model
 
 https://code.djangoproject.com/ticket/373  
 https://code.djangoproject.com/wiki/MultipleColumnPrimaryKeys  
-https://gijutsu.com/en/2021/01/19/django-composite-primary-key/  
+https://gijutsu.com/en/2021/01/19/django-composite-primary-key/
+https://gijutsu.com/en/2021/03/16/django-ticket373/
