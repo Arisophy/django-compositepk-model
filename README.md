@@ -90,6 +90,19 @@ bulk_update methond avairable for PostgreSQL. But SQLite3 is not supported.
    Album.objects.bulk_update(albums, ['num_stars',])
 ```
 
+## Limitations
+
+### 1. Migration(Create table)
+Migration" will fail because "primary_key=True" to multi-column unless "managed = False". 
+Legacy tables already exisit, or have to be created by hand.
+Otherwise, comment out "primary_key=True" and "managed=False" while migration.
+
+### 2. Create in Admin, CreateView
+CreateView do unique check to each key Field. So you can't add enough child records. But, this is only CreateView's problem. Your program can create child records by QuerySet or Model method.
+
+### 3. ForeignKey
+Need to make CPkForeignKey to support GrandChild model.
+
 ## Installation
 
 pip install django-compositepk-model
