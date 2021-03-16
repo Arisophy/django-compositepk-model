@@ -93,7 +93,7 @@ bulk_update methond avairable for PostgreSQL. But SQLite3 is not supported.
 ## Limitations
 
 ### 1. Migration(Create table)
-Migration" will fail because "primary_key=True" to multi-column unless "managed = False". 
+Migration will fail because "primary_key=True" to multi-column unless "managed = False". 
 Legacy tables already exisit, or have to be created by hand.
 Otherwise, comment out "primary_key=True" and "managed=False" while migration.
 
