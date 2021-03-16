@@ -97,7 +97,7 @@ Migration will fail because "primary_key=True" to multi-column unless "managed =
 Legacy tables already exisit, or have to be created by hand.
 Otherwise, comment out "primary_key=True" and "managed=False" while migration.
 
-### 2. Create in Admin(CreateView's problem?)
+### 2. Create in Admin(CreateView's problem)
 CreateView do unique check to each key Field. So you can't add enough child records. But, this is only CreateView's problem. Your program can create child records by QuerySet or Model method.
 
 ### 3. ForeignKey
