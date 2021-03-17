@@ -103,7 +103,7 @@ CreateView do unique check to each key Field. So you can't add enough child reco
 ### 3. ForeignKey
 Need to make CPkForeignKey to support GrandChild model.
 
-### 4. Multi-column IN not available for SQLite
+### 4. Multi-column IN query not available for SQLite
 Django model doesn't support multi-column "IN" query for SQLite at present.
 
 ### 5. Create is better than Save
