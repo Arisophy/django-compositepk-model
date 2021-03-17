@@ -107,7 +107,7 @@ Need to make CPkForeignKey to support GrandChild model.
 Django model doesn't support multi-column "IN" query for SQLite at present.
 
 ### 5. Create is better than Save
-For Insert, you'd better use CPKQuerySet.create rather than CPKModel.save. 
+For INSERT, you'd better use CPKQuerySet.create rather than CPKModel.save. 
 Because Model.save will try to UPDATE first if key value is set. Another way to avoid this, you can use option force_insert=True.
 
 ```python
