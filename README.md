@@ -34,7 +34,8 @@ class CompanyBranch(CPkModel):
     company = models.ForeignKey(
         Company,
         primary_key=True,       # for CompositePK
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE,
+    )
     country_code = models.CharField(
         max_length=100,
         primary_key=True,       # for CompositePK
