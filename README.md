@@ -101,7 +101,7 @@ Otherwise, comment out "primary_key=True" and "managed=False" while migration.
 CreateView do unique check to each key Field. So you can't add enough child records. But, this is only CreateView's problem. Your program can create child records by QuerySet or Model method.
 
 ### 3. ForeignKey
-Need to make CPkForeignKey to support GrandChild model.
+Need to make CPkForeignKey to support relations to GrandChild model.
 
 ### 4. Multi-column IN query not available for SQLite
 Django model doesn't support multi-column "IN" query for SQLite at present.
