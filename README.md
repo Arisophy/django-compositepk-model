@@ -1,5 +1,7 @@
 # django-compositepk-model
 
+[日本語](https://gijutsu.com/2021/06/06/djangodjango-compositepk-model/)
+ 
 Provide an extended Django Model class named 'CPkModel' that supports composite primary keys. Also provide an extended Query class 'CPkQuery' that supports multi-column lookups.
 
 This package supports treating legacy db tables with a composite primary key, without adding a surrogate key.
