@@ -112,7 +112,7 @@ class AlbumFormView(FormView):
         ######################################
         # Create pattern(1) : By Model.save
         album = Album(**cleaned_data)
-        album.save()
+        album.save(force_insert=True)
         return super().form_valid(form)
 
 def set_5stars(request, id):
