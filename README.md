@@ -126,7 +126,7 @@ obj.save(force_insert=True)
 
 pip install django-compositepk-model
 
-[![Downloads](https://pepy.tech/badge/django-compositepk-model)](https://pepy.tech/project/django-compositepk-model)
+[![Downloads](https://static.pepy.tech/badge/django-compositepk-model)](https://pepy.tech/project/django-compositepk-model)
 
 ## Links
 
