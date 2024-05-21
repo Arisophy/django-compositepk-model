@@ -57,7 +57,7 @@ class CPkQueryMixin():
                     names = tuple('-' + name for name in self._get_pk_names())                    
                     new_ordering += names
                 else:
-                    new_ordering += (item)
+                    new_ordering += (item,)
             super().add_ordering(*new_ordering)
         else:
             super().add_ordering(*ordering)
