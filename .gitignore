@@ -351,3 +351,4 @@ MigrationBackup/
 /compositepk-model/env/Scripts
 /compositepk-model/env/Lib/site-packages
 /compositepk-model/env
+/dist
