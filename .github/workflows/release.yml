@@ -2,10 +2,8 @@ name: Publish Python Package
 
 on:
   push:
-    branches:
-      - 'main'
-    tags-ignore:
-      - 'v1.0.3'
+    tags:
+      - 'v1.0.4'
 
 jobs:
   build:
