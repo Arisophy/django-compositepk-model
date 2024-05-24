@@ -3,9 +3,9 @@ name: Publish Python Package
 on:
   push:
     branches:
-      - main
+      - 'main'
     tags-ignore:
-      - v1.0.3
+      - 'v1.0.3'
 
 jobs:
   build:
