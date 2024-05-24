@@ -45,7 +45,6 @@ Repository = "https://github.com/Arisophy/django-compositepk-model.git"
 Issues = "https://github.com/Arisophy/django-compositepk-model/issues"
 
 [tool.hatch.build.targets.sdist]
-ignore-vcs = true
 include = [
   "compositepk-model/cpkmodel/*.py",
 ]
